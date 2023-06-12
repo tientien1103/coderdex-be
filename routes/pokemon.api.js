@@ -146,11 +146,11 @@ router.get("/:pokemonId", (req, res, next) => {
 router.post("/", (req, res, next) => {
   try {
     const { name, id, types, imageUrl, pages } = req.body;
-    // if (!name || !types || !imageUrl || !id) {
-    //   const exception = new Error("Missing required data");
-    //   exception.statusCode = 400;
-    //   throw exception;
-    // }
+    if (!name || !types || !imageUrl || !id) {
+      const exception = new Error("Missing required data");
+      exception.statusCode = 400;
+      throw exception;
+    }
 
     let db = fs.readFileSync("pokemon.json", "utf-8");
     db = JSON.parse(db);
